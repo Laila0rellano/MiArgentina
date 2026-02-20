@@ -13,6 +13,7 @@
             display: flex;
             flex-direction: column;
             height: 100vh;
+            overflow: hidden;
         }
 
         /* Header Azul */
@@ -25,148 +26,129 @@
             font-size: 18px;
             font-weight: bold;
         }
-        .header i { margin-right: 15px; cursor: pointer; }
+        .header i { margin-right: 15px; }
 
-        /* Contenedor de la Tarjeta */
         .main-content {
             flex: 1;
             padding: 16px;
+            overflow-y: auto;
         }
+
         .card {
             background: white;
             border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
             padding: 16px;
         }
+
         .user-name {
             font-size: 18px;
             font-weight: bold;
             color: #333;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
-/* Contenedor con perspectiva para el efecto de giro */
-    .dni-wrapper {
-        position: relative;
-        width: 100%;
-        height: 210dp; /* Ajusta según tus fotos */
-        perspective: 1000px;
-        overflow: hidden;
-        border-radius: 12px;
-    }
 
-    .dni-image {
-        width: 100%;
-        display: block;
-        transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s;
-        border-radius: 12px;
-    }
-
-    /* Clase para cuando la imagen sale o entra */
-    .slide-hidden {
-        opacity: 0;
-        transform: scale(0.95) rotateY(10deg);
-        position: absolute;
-        top: 0;
-        left: 0;
-    }
-
-    .slide-active {
-        opacity: 1;
-        transform: scale(1) rotateY(0deg);
-        position: relative;
-    }
-
-    /* Puntos indicadores animados */
-    .dot {
-        height: 8px;
-        width: 8px;
-        background: #BBB;
-        border-radius: 50%;
-        transition: all 0.3s ease;
-        cursor: pointer;
-    }
-    .dot.active {
-        background: #3B32AD;
-        width: 20px; /* Se estira un poquito como en apps modernas */
-        border-radius: 4px;
-    }
-        /* Imagen del DNI */
+        /* --- EFECTO DE GIRO (FLIP) --- */
         .dni-container {
             width: 100%;
-            border-radius: 8px;
-            overflow: hidden;
-            margin-bottom: 10px;
-        }
-        .dni-image {
-            width: 100%;
-            display: block;
+            perspective: 1000px;
+            margin-bottom: 15px;
         }
 
-        /* Indicadores de puntos */
+        .dni-inner {
+            position: relative;
+            width: 100%;
+            height: 215px; /* Ajustar segun tus imagenes */
+            text-align: center;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-style: preserve-3d;
+        }
+
+        /* Clase que dispara el giro */
+        .dni-inner.flipped {
+            transform: rotateY(180deg);
+        }
+
+        .dni-front, .dni-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 10px;
+            /* Sombra gris suave como pediste */
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15); 
+        }
+
+        .dni-back {
+            transform: rotateY(180deg);
+        }
+
+        .dni-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        /* Puntos indicadores */
         .dots {
             display: flex;
             justify-content: center;
-            gap: 8px;
-            margin: 10px 0;
+            gap: 10px;
+            margin-bottom: 15px;
         }
-        .dot { height: 8px; width: 8px; background: #BBB; border-radius: 50%; }
+
+        .dot {
+            height: 8px;
+            width: 8px;
+            background: #BBB;
+            border-radius: 50%;
+            transition: background 0.3s;
+        }
+
         .dot.active { background: #3B32AD; }
 
         .update-text {
             text-align: center;
-            font-size: 11px;
-            color: #666;
-            margin-bottom: 15px;
+            font-size: 12px;
+            color: #777;
+            margin-bottom: 20px;
         }
 
-        /* Botones */
         .actions {
             display: flex;
             border-top: 1px solid #EEE;
             border-bottom: 1px solid #EEE;
         }
+
         .action-btn {
             flex: 1;
             padding: 15px;
-            text-align: center;
             background: none;
             border: none;
-            font-size: 14px;
             color: #3B32AD;
+            font-size: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
-            cursor: pointer;
         }
-        .btn-red { color: #D32F2F; }
-        .divider { width: 1px; background: #EEE; }
 
         .qr-section {
-            padding: 12px;
-            display: flex;
-            align-items: center;
+            padding: 15px 0;
             color: #333;
             font-size: 14px;
+            display: flex;
+            align-items: center;
             gap: 10px;
         }
 
-        /* Menu Inferior */
-        .bottom-nav {
-            background: white;
-            display: flex;
-            justify-content: space-around;
-            padding: 10px 0;
+        /* --- MENU INFERIOR COMO IMAGEN --- */
+        .bottom-nav-img {
+            width: 100%;
+            display: block;
             border-top: 1px solid #DDD;
         }
-        .nav-item {
-            text-align: center;
-            font-size: 10px;
-            color: #666;
-        }
-        .nav-item i { font-size: 20px; display: block; margin-bottom: 4px; }
-        .nav-item.active { color: #3B32AD; }
     </style>
 </head>
 <body>
@@ -179,26 +161,30 @@
         <div class="card">
             <div class="user-name">Jazmín Carolina Azcurra</div>
             
-            <div class="dni-container" id="dniArea">
-    <div class="dni-wrapper">
-        <img src="dni_frente.jpg" alt="Frente" class="dni-image slide-active" id="imgFrente">
-        <img src="dni_dorso.jpg" alt="Dorso" class="dni-image slide-hidden" id="imgDorso">
-    </div>
-</div>
+            <div class="dni-container" id="swipeArea">
+                <div class="dni-inner" id="dniFlip">
+                    <div class="dni-front">
+                        <img src="dni_frente.jpg" class="dni-img">
+                    </div>
+                    <div class="dni-back">
+                        <img src="dni_dorso.jpg" class="dni-img">
+                    </div>
+                </div>
+            </div>
+
             <div class="dots">
-    <div class="dot active" id="dot0" onclick="mostrarLado(0)"></div>
-    <div class="dot" id="dot1" onclick="mostrarLado(1)"></div>
-</div>
+                <div class="dot active" id="dot0"></div>
+                <div class="dot" id="dot1"></div>
+            </div>
+
             <div class="update-text">Última actualización 20/02/2026 18:22 hs</div>
 
             <div class="actions">
-                <button class="action-btn" onclick="location.href='detalle.html'">
-                    <i class="far fa-eye"></i> Ver detalle
-                </button>
-                <div class="divider"></div>
-                <button class="action-btn btn-red">
-                    <i class="fas fa-times"></i> Desactivar DNI
-                </button>
+                <<button class="action-btn" onclick="window.location.href='detalle.html'">
+        <i class="far fa-eye"></i> Ver detalle
+    </button>
+                <div style="width: 1px; background: #EEE;"></div>
+                <div class="action-btn" style="color: #3B32AD;"><i class="fas fa-times"></i> Desactivar DNI</div>
             </div>
 
             <div class="qr-section">
@@ -207,58 +193,44 @@
         </div>
     </div>
 
-    <div class="bottom-nav">
-        <div class="nav-item active"><i class="fas fa-home"></i>Inicio</div>
-        <div class="nav-item"><i class="far fa-newspaper"></i>Novedades</div>
-        <div class="nav-item"><i class="fas fa-phone"></i>Teléfonos</div>
-        <div class="nav-item"><img src="tina.png"></i>Tina</div>
-    </div>
+    <img src="menu_inferior.jpeg" class="bottom-nav-img" alt="Navegación">
 
-<script>
-    let ladoActual = 0; // 0 para frente, 1 para dorso
-    const imgFrente = document.getElementById('imgFrente');
-    const imgDorso = document.getElementById('imgDorso');
-    const dot0 = document.getElementById('dot0');
-    const dot1 = document.getElementById('dot1');
+    <script>
+        const card = document.getElementById('dniFlip');
+        const dot0 = document.getElementById('dot0');
+        const dot1 = document.getElementById('dot1');
+        let flipped = false;
 
-    function mostrarLado(indice) {
-        if (indice === 0) {
-            imgFrente.className = 'dni-image slide-active';
-            imgDorso.className = 'dni-image slide-hidden';
-            dot0.classList.add('active');
-            dot1.classList.remove('active');
-            ladoActual = 0;
-        } else {
-            imgFrente.className = 'dni-image slide-hidden';
-            imgDorso.className = 'dni-image slide-active';
-            dot0.classList.remove('active');
-            dot1.classList.add('active');
-            ladoActual = 1;
+        function toggleFlip() {
+            flipped = !flipped;
+            if (flipped) {
+                card.classList.add('flipped');
+                dot0.classList.remove('active');
+                dot1.classList.add('active');
+            } else {
+                card.classList.remove('flipped');
+                dot0.classList.add('active');
+                dot1.classList.remove('active');
+            }
         }
-    }
 
-    // --- LÓGICA DE DESLIZAMIENTO (SWIPE) ---
-    let touchstartX = 0;
-    let touchendX = 0;
-    const areaDni = document.getElementById('dniArea');
+        // --- GESTOS SWIPE ---
+        let startX = 0;
+        const swipeArea = document.getElementById('swipeArea');
 
-    areaDni.addEventListener('touchstart', e => {
-        touchstartX = e.changedTouches[0].screenX;
-    });
+        swipeArea.addEventListener('touchstart', e => {
+            startX = e.touches[0].clientX;
+        });
 
-    areaDni.addEventListener('touchend', e => {
-        touchendX = e.changedTouches[0].screenX;
-        handleGesture();
-    });
+        swipeArea.addEventListener('touchend', e => {
+            let endX = e.changedTouches[0].clientX;
+            if (Math.abs(startX - endX) > 50) {
+                toggleFlip();
+            }
+        });
 
-    function handleGesture() {
-        if (touchendX < touchstartX - 50) {
-            // Deslizó a la izquierda -> ver dorso
-            mostrarLado(1);
-        }
-        if (touchendX > touchstartX + 50) {
-            // Deslizó a la derecha -> ver frente
-            mostrarLado(0);
-        }
-    }
-</script>
+        // También permite hacer flip al tocar la tarjeta
+        swipeArea.addEventListener('click', toggleFlip);
+    </script>
+</body>
+</html>
