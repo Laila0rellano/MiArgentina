@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalles - Mi Argentina</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: #F5F5F5;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        .header {
+            background-color: #3B32AD;
+            color: white;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .header i { margin-right: 15px; cursor: pointer; }
+
+        .main-content {
+            flex: 1;
+            padding: 16px;
+            overflow-y: auto;
+        }
+
+        .card-detail {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        /* Foto circular superior */
+        .profile-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .profile-img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #EEE;
+        }
+        .barcode-img {
+            width: 180px;
+            display: block;
+            margin: 10px auto;
+        }
+
+        /* Cuadrícula de datos */
+        .data-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .label {
+            color: #888;
+            font-size: 13px;
+            margin-bottom: 4px;
+        }
+        .value {
+            color: #333;
+            font-weight: bold;
+            font-size: 15px;
+        }
+
+        .full-width {
+            grid-column: span 2;
+            border-top: 1px solid #EEE;
+            padding-top: 15px;
+        }
+
+        .divider-line {
+            height: 1px;
+            background: #EEE;
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <i class="fas fa-arrow-left" onclick="window.location.href='index.html'"></i> DNI Digital
+</div>
+
+    <div class="main-content">
+        <div class="card-detail">
+            <div class="profile-container">
+                <img src="cara.jpg" class="profile-img">
+                <img src="qr.jpg" class="barcode-img">
+            </div>
+
+            <div class="data-grid">
+                <div>
+                    <div class="label">DNI</div>
+                    <div class="value">47457728</div>
+                </div>
+                <div>
+                    <div class="label">Número de trámite</div>
+                    <div class="value">7103668761812</div>
+                </div>
+                <div>
+                    <div class="label">Fecha de emisión</div>
+                    <div class="value">07/09/2023</div>
+                </div>
+                <div>
+                    <div class="label">Fecha de vencimiento</div>
+                    <div class="value">07/09/2038</div>
+                </div>
+
+                <div class="full-width">
+                    <div class="label">Nombre</div>
+                    <div class="value">Jazmín Carolina</div>
+                </div>
+                <div class="full-width">
+                    <div class="label">Apellido</div>
+                    <div class="value">AZCURRA</div>
+                </div>
+                <div>
+                    <div class="label">Sexo</div>
+                    <div class="value">F</div>
+                </div>
+                <div>
+                    <div class="label">Fecha de nacimiento</div>
+                    <div class="value">18/06/2007</div>
+                </div>
+                <div>
+                    <div class="label">Nacionalidad</div>
+                    <div class="value">AR</div>
+                </div>
+                <div>
+                    <div class="label">Lugar de nacimiento</div>
+                    <div class="value">ARGENTINA</div>
+                </div>
+                <div class="full-width">
+                    <div class="label">Dirección</div>
+                    <div class="value">SANTIAGO COSTAMAGNA 7031, DON BOSCO, CORDOBA CAPITAL, 5000</div>
+                </div>
+            </div>
+        </div>
+    </div>
+<img src="menu_inferior.jpeg" class="bottom-nav-img" alt="Navegación">
+
+</body>
+</html>
