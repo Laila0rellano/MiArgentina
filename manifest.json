@@ -1,6 +1,6 @@
 {
   "short_name": "Mi Argentina",
-  "name": "Mi Argentina",
+  "name": "Mi Argentina - DNI Digital",
   "icons": [
     {
       "src": "logo_app.png",
@@ -8,7 +8,7 @@
       "type": "image/png"
     }
   ],
-  "start_url": "/index.html",
+  "start_url": "./index.html",
   "display": "standalone",
   "theme_color": "#3B32AD",
   "background_color": "#F5F5F5"
