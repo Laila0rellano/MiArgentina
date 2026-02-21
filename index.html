@@ -147,10 +147,15 @@
             justify-content: space-between;
         }
 
-        .bottom-nav-img {
-            width: 100%;
-            display: block;
-        }
+ .bottom-nav-img {
+    position: fixed;
+    bottom: 0;
+    left: 0; /* Importante para que no se desplace */
+    width: 100%;
+    height: auto;
+    z-index: 9999; /* Para que esté por encima de cualquier otra cosa */
+    display: block !important;
+}
     </style>
 </head>
 <body>
@@ -257,4 +262,5 @@
 </body>
 
 </html>
+
 
